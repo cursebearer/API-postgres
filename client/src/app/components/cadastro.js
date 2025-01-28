@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-const Cadastro = () => {
+const Cadastro = ({ setData }) => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [email, setEmail] = useState('');
@@ -12,18 +12,22 @@ const Cadastro = () => {
     e.preventDefault();
     const userData = { name, age, email };
 
+    try {
+      const { data } = await axios.post('http://localhost:3001/usuarios/cadastro', {
+        name: userData.name,
+        age: userData.age,
+        email: userData.email
+      }, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
-    const { data } = await axios.post('http://localhost:3001/usuarios/cadastro', {
-      name: userData.name,
-      age: userData.age,
-      email: userData.email
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    console.log(data);
+
+      window.location.reload()
+    } catch (error) {
+      console.error('Erro ao cadastrar o usuário:', error.message);
+    }
   };
 
   return (

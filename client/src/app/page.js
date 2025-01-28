@@ -1,10 +1,9 @@
-import Link from 'next/link';
-import Cadastro from './components/cadastro';
+import Lista from './components/lista.js';
 
 export default function Home() {
   return (
     <div>
-      <Cadastro/>
+      <Lista/>
     </div>
   );
 }
