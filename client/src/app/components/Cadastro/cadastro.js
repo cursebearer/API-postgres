@@ -3,7 +3,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-const Cadastro = ({ setData }) => {
+const Cadastro = () => {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [email, setEmail] = useState('');

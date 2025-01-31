@@ -1,5 +1,5 @@
-import Cadastro from './cadastro.js';
-import Card from './card.js';
+import Cadastro from '../Cadastro/cadastro.js';
+import Card from '../Card/card.js';
 
 export default function Lista() {
 

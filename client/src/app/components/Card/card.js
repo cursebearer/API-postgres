@@ -2,10 +2,13 @@
 
 import axios from "axios";
 import { useState, useEffect } from "react";
+import Modal from "../Modal/modal";
 
 const Card = () => {    
     const [data, setData] = useState([]);
     const [error, setError] = useState(null);
+    const [selectedUser, setSelectedUser] = useState(null); 
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         axios.get("http://localhost:3001/usuarios/todos")
@@ -31,6 +34,20 @@ const Card = () => {
         }
     };
 
+    const handleEdit = (user) => {
+        setSelectedUser(user);
+        setIsModalOpen(true);
+      };
+
+    const handleUserUpdated = (updatedUser) => {
+        setData(data.map(user => (user.id === updatedUser.id ? updatedUser : user)));
+    };
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false);
+        setSelectedUser(null); 
+    };
+
     return (
         <div>
             <h1>Lista de Usuários</h1>
@@ -40,10 +57,19 @@ const Card = () => {
                         <p>Nome: {user.name}</p>
                         <p>Idade: {user.age}</p>
                         <p>Email: {user.email}</p>
+                        <button onClick={() => handleEdit(user)}>Editar</button>
                         <button onClick={() => handleDelete(user.id)}>Deletar</button>
+                        
                     </li>
                 ))}
             </ul>
+            {isModalOpen && selectedUser && (
+            <Modal 
+            user={selectedUser} 
+            onClose={handleCloseModal} 
+            onUserUpdated={handleUserUpdated}
+            />
+            )}
         </div>
     );
 }

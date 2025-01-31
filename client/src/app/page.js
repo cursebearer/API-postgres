@@ -1,4 +1,4 @@
-import Lista from './components/lista.js';
+import Lista from './components/Lista/lista.js';
 
 export default function Home() {
   return (

@@ -19,7 +19,7 @@ sequelize
 .then( () => {
     console.log("Banco de dados conectado")
     app.listen(3001, () => {
-        console.log("Servidor rodando na porta 3000");
+        console.log("Servidor rodando na porta 3001");
       })
 })
 .catch( (err) => {
